@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:background="#00A4A5"
     android:id="@+id/up"
+<<<<<<< HEAD
     tools:context=".MainActivity">
+=======
+    tools:context=".LoginActivity">
+>>>>>>> d295a40a4d95d8f2622714cf4c8437bf3217780a
 
 
 
@@ -16,7 +20,10 @@
         android:id="@+id/icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+<<<<<<< HEAD
         android:src="@drawable/doctor"
+=======
+>>>>>>> d295a40a4d95d8f2622714cf4c8437bf3217780a
         app:civ_border_color="#FFFF"
         app:civ_border_width="5dp"/>
 

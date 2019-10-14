@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#09C"
+    android:padding="@dimen/widget_margin">
+
+<Button
+    android:id="@+id/panicButtonLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="SOS"
+    android:textColor="#ffffff"
+    android:textSize="24dp"
+    android:textStyle="bold|italic" />
+
+
+</RelativeLayout>
