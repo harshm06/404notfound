@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+
+    tools:context=".PanicActivity">
+
+    <TextView
+        android:id="@+id/textMsg1"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+
+        android:text="sending text to ****"
+        android:textSize="25dp" />
+
+    <ProgressBar
+        android:layout_toRightOf="@+id/textMsg1"
+        android:id="@+id/ProgressBar1"
+        android:layout_margin="10dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/textMsg2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textMsg1"
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+
+        android:layout_marginBottom="5dp"
+        android:text="sending text to ****"
+        android:textSize="25dp" />
+
+    <ProgressBar
+        android:layout_toRightOf="@+id/textMsg2"
+        android:layout_below="@+id/ProgressBar1"
+        android:id="@+id/ProgressBar2"
+        android:layout_margin="10dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+
+    <TextView
+        android:id="@+id/CallAmbulance"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textMsg2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_margin="10dp"
+
+        android:text="sending call to ****"
+        android:textSize="25dp" />
+
+    <ProgressBar
+        android:layout_toRightOf="@+id/CallAmbulance"
+        android:layout_below="@+id/ProgressBar2"
+        android:layout_margin="10dp"
+
+        android:id="@+id/ProgressBar3"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+</RelativeLayout>
