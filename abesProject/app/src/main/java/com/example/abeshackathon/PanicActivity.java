@@ -2,16 +2,41 @@ package com.example.abeshackathon;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.abeshackathon.Apiinterface.Login;
+import com.example.abeshackathon.JsonBody.PanicData;
+import com.example.abeshackathon.Receiveddata.Loginresponse;
+import com.example.abeshackathon.Receiveddata.PanicResponse;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PanicActivity extends AppCompatActivity {
     TextView countdown;
@@ -54,7 +79,122 @@ public class PanicActivity extends AppCompatActivity {
         countdown.setVisibility(View.GONE);
         cancel.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.VISIBLE);
-        Log.e("panic reached", " ");
+        SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+        String data = sharedPreferences.getString("loginData","data not stored");
+        Log.e("panic reached",data);
+        Loginresponse loginresponse=new Gson().fromJson(data,Loginresponse.class);
+        PanicData panicdata = new PanicData();
+        panicdata.setId(loginresponse.getId());
+        Log.e("panic reached",loginresponse.getId());
+
+        final Login login = Retro.createService(Login.class);
+        Call<List<PanicResponse>> call = login.panicResponse(panicdata);
+        call.enqueue(new Callback<List<PanicResponse>>() {
+            @Override
+            public void onResponse(Call<List<PanicResponse>> call, Response<List<PanicResponse>> response) {
+                if (!response.isSuccessful()){
+                    Log.e("unsuccessful"," ");
+                    return;
+                }
+                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("PanicData",new Gson().toJson(response.body()));
+                editor.commit();
+
+                if (sharedPreferences.getString("PanicData","null")=="null"){
+                    Log.e("data not stored","");
+                    return;
+                }
+                setPanicData();
+                Log.e("panic data",new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<List<PanicResponse>> call, Throwable t) {
+                Log.e("panic failed",t.getMessage());
+            }
+        });
+
+    }
+
+    void setPanicData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+        String response = sharedPreferences.getString("PanicData","null");
+        Type type = new TypeToken<List<PanicResponse>>() {
+        }.getType();
+        List<PanicResponse> panicResponses=new Gson().fromJson(response,type);
+
+        onMsg(panicResponses.get(0).getLinkEmergencyContact());
+        onMsg(panicResponses.get(0).getLinkDocName());
+        onCall("7376148354");
+
+//        onMsg(panicResponses.get(0).getLinkDocName());
+//        panicResponses.get(0).;
+    }
+
+    private boolean permissionGrantedCall() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.CALL_PHONE}, 1000);
+            return false;
+        }
+        return true;
+    }
+
+    @SuppressLint("MissingPermission")
+    private void onCall(String number) {
+        if (number.length() > 0) {
+            if (permissionGrantedCall()) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + number));
+                Log.e("number call",number);
+                this.startActivity(callIntent);
+            }
+        } else {
+            Toast.makeText(this, "enter valid number", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean permissionGrantedMsg() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.SEND_SMS}, 1000);
+            return false;
+        }
+        return true;
+    }
+
+    private void onMsg(final String number) {
+        if (number.length() == 0) {
+            return;
+        }
+        if (permissionGrantedMsg()) {
+
+            sendSMS(number);
+
+        }
+    }
+
+    public void sendSMS(String number) {
+
+//        Uri sms_uri = Uri.parse("smsto:" + number);
+//        Intent sms_intent = new Intent(Intent.ACTION_SENDTO, sms_uri);
+//        sms_intent.putExtra("sms_body", "-- From team ERP");
+//        this.startActivity(sms_intent);
+//        SmsManager.getDefault().sendTextMessage(number,null,"message here",null,null);
+
+
+        String SMS_SENT_INTENT_FILTER = "com.yourapp.sms_send";
+        String SMS_DELIVERED_INTENT_FILTER = "com.yourapp.sms_delivered";
+
+        String message = "SOS!! I am seriously ill and being taken to nearest hospital ";
+        Log.e("number",number);
+
+        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(
+                SMS_SENT_INTENT_FILTER), 0);
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent(
+                SMS_DELIVERED_INTENT_FILTER), 0);
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(number, null, message, sentPI, deliveredPI);
 
     }
 }
