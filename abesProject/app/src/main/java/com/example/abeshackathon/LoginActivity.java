@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("check","true");
                                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("loginData",gson.toJson(response.body()));
+                                editor.putString("logindata",gson.toJson(response.body()));
                                 editor.apply();
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);

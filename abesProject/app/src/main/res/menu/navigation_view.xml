@@ -24,7 +24,7 @@
             android:id="@+id/medical"
             android:checked="true"
             android:icon="@drawable/stethoscope"
-            android:title="Medical" />
+            android:title="Checkupreports" />
 
 
         <item
