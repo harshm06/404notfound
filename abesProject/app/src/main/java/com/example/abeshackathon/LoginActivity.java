@@ -57,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             Log.e("check","true");
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("username",loginresponse.getStatus());
                             startActivity(intent);
                             finish();
                         }
