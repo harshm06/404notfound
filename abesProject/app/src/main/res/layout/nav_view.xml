@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="false"
+    android:id="@+id/nav_header"
+    android:background="#00A4A5">
 
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/drawerImage"
+        android:transitionName="profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/baseline_account_circle_black_18dp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/drawerImage"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/drawerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="left"
+            android:text="ADITEYA SRIVASTAVA"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/drawerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/drawerName"
+            android:layout_alignLeft="@+id/drawerName"
+            android:layout_alignRight="@+id/drawerName"
+            android:layout_alignStart="@+id/drawerName"
+            android:layout_below="@+id/drawerName"
+            android:layout_marginTop="3dp"
+            android:gravity="left"
+            android:text="1721CS1157"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</RelativeLayout>
