@@ -49,16 +49,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Loginresponse> call, Response<Loginresponse> response) {
                         Loginresponse loginresponse=response.body();
-                        SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("data",gson.toJson(response.body()));
-                        editor.apply();
+
                         Log.e("response",gson.toJson(response.body()));
                         if(response.body()!=null) {
                             if (loginresponse.getStatus().equalsIgnoreCase("invalid username") || loginresponse.getStatus().equalsIgnoreCase("wrong password")) {
                                 Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
                             } else {
                                 Log.e("check","true");
+                                SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putString("logindata",gson.toJson(response.body()));
+                                editor.apply();
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
                             finish();

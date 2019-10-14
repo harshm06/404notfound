@@ -13,6 +13,43 @@ public class Loginresponse {
     @Expose
     String id;
 
+    @SerializedName("from_date")
+    @Expose
+    String fromdate;
+
+
+    @SerializedName("next_date")
+    @Expose
+    String nextdate;
+
+    public String getFromdate() {
+        return fromdate;
+    }
+
+    public void setFromdate(String fromdate) {
+        this.fromdate = fromdate;
+    }
+
+    public String getNextdate() {
+        return nextdate;
+    }
+
+    public void setNextdate(String nextdate) {
+        this.nextdate = nextdate;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remarks) {
+        this.remark = remarks;
+    }
+
+    @SerializedName("remark")
+    @Expose
+    String remark;
+
     public String getId() {
         return id;
     }

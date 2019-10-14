@@ -1,5 +1,6 @@
 package com.example.abeshackathon;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -39,7 +40,35 @@ public class MainActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
+                Class fragmentClass = null;
+                Menu menu = navigationView.getMenu();
+                switch (menuItem.getItemId()) {
+
+                    case R.id.nav_dashboard:
+                        behindView.setVisibility(View.VISIBLE);
+                        fragmentClass = Dashboard.class;
+                        break;
+
+                    case R.id.medical:
+                        behindView.setVisibility(View.GONE);
+                        fragmentClass= Medical.class;
+                        break;
+
+                    case R.id.Profile:
+                        behindView.setVisibility(View.GONE);
+                        fragmentClass= Profile.class;
+                        break;
+                    case R.id.Logout:
+                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                }
+                return true;
+            }
+        });
 
         Fragment fragment = null;
         Class fragmentClass = null;
@@ -88,32 +117,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass = null;
-        Menu menu = navigationView.getMenu();
-        switch (item.getItemId()) {
-
-            case R.id.nav_dashboard:
-                behindView.setVisibility(View.VISIBLE);
-                fragmentClass = Dashboard.class;
-                break;
-
-            case R.id.medical:
-                behindView.setVisibility(View.GONE);
-                fragmentClass= Medical.class;
-                break;
-
-            case R.id.Profile:
-                behindView.setVisibility(View.GONE);
-                fragmentClass= Profile.class;
-                break;
-            case R.id.Logout:
-                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-        }
-        return true;
-    }
 
 }
