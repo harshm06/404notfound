@@ -3,6 +3,7 @@ package com.example.abeshackathon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,18 +49,24 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Loginresponse> call, Response<Loginresponse> response) {
                         Loginresponse loginresponse=response.body();
+                        SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("data",gson.toJson(response.body()));
+                        editor.apply();
                         Log.e("response",gson.toJson(response.body()));
-                        if(loginresponse.getStatus().equalsIgnoreCase("invalid username")||loginresponse.getStatus().equalsIgnoreCase("wrong password"))
-                        {
-                            Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        if(response.body()!=null) {
+                            if (loginresponse.getStatus().equalsIgnoreCase("invalid username") || loginresponse.getStatus().equalsIgnoreCase("wrong password")) {
+                                Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_LONG).show();
+                            } else {
 
-                            Log.e("check","true");
-                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("username",loginresponse.getStatus());
-                            startActivity(intent);
-                            finish();
+                                Log.e("check", "true");
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("username", loginresponse.getStatus());
+                                startActivity(intent);
+                                finish();
+                            }
+                        }else {
+                            Toast.makeText(LoginActivity.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
                         }
 
                     }

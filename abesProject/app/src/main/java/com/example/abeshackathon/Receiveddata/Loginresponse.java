@@ -9,6 +9,18 @@ public class Loginresponse {
     @Expose
     String status;
 
+    @SerializedName("id")
+    @Expose
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getStatus() {
         return status;
     }
