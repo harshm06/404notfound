@@ -17,5 +17,5 @@ public interface Login {
     Call<Loginresponse> requestresponse(@Body Logindata logindata);
 
     @POST("health/panic_button/")
-    Call<PanicResponse> panicResponse(@Body PanicData panicData);
+    Call<List<PanicResponse>> panicResponse(@Body PanicData panicData);
 }
