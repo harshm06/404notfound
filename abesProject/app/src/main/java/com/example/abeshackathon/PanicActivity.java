@@ -52,7 +52,7 @@ public class PanicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_panic);
 
         final SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
-        String data = sharedPreferences.getString("loginData","data not stored");
+        String data = sharedPreferences.getString("logindata","data not stored");
         Loginresponse loginresponse=new Gson().fromJson(data,Loginresponse.class);
         PanicData panicdata = new PanicData();
         panicdata.setId(loginresponse.getId());

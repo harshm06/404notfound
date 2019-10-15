@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.abeshackathon.Apiinterface.Medicalrequest;
-import com.example.abeshackathon.JsonBody.Medicaldata;
+import com.example.abeshackathon.Receiveddata.Medicaldatarersponse;
 import com.example.abeshackathon.R;
 import com.example.abeshackathon.Receiveddata.Loginresponse;
 import com.example.abeshackathon.Retro;
@@ -32,7 +32,7 @@ public class Medical extends Fragment {
 
 
     Gson gson=new Gson();
-    List<Medicaldata> medicaldata;
+    List<Medicaldatarersponse> medicaldata;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View parentView = inflater.inflate(R.layout.fragment_medical, container, false);
@@ -44,16 +44,16 @@ public class Medical extends Fragment {
         }.getType();
         Loginresponse loginresponse=gson.fromJson(string,type);
         Medicalrequest medicalrequest= Retro.createService(Medicalrequest.class);
-        Call<List<Medicaldata>> call=medicalrequest.requestresponse(loginresponse.getId());
-        call.enqueue(new Callback<List<Medicaldata>>() {
+        Call<List<Medicaldatarersponse>> call=medicalrequest.requestresponse(loginresponse.getId());
+        call.enqueue(new Callback<List<Medicaldatarersponse>>() {
             @Override
-            public void onResponse(Call<List<Medicaldata>> call, Response<List<Medicaldata>> response) {
+            public void onResponse(Call<List<Medicaldatarersponse>> call, Response<List<Medicaldatarersponse>> response) {
                  medicaldata=response.body();
                 Log.e("medicaldta",gson.toJson(medicaldata));
             }
 
             @Override
-            public void onFailure(Call<List<Medicaldata>> call, Throwable t) {
+            public void onFailure(Call<List<Medicaldatarersponse>> call, Throwable t) {
 
             }
         });

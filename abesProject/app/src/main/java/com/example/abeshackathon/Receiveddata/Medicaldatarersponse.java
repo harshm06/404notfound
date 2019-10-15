@@ -1,9 +1,9 @@
-package com.example.abeshackathon.JsonBody;
+package com.example.abeshackathon.Receiveddata;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Medicaldata {
+public class Medicaldatarersponse {
 
     @SerializedName("final_remark")
     @Expose
