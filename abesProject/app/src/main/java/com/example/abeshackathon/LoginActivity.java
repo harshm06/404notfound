@@ -35,10 +35,11 @@ public class LoginActivity extends AppCompatActivity {
 //session
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
-            String flag = sharedPreferences.getString("loginData","null");
+            String flag = sharedPreferences.getString("logindata","null");
             if(flag.equals("null")){
 
             }else{
+                finish();
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
             }
         }
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("check","true");
                                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("loginData",gson.toJson(response.body()));
+                                editor.putString("logindata",gson.toJson(response.body()));
                                 editor.apply();
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);

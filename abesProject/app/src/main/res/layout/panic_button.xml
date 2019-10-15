@@ -1,9 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e00"
+
     android:orientation="vertical"
     android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/PanicDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:text="Alcoholic:Frequesnt Consumer"/>
 
     <Button
         android:layout_gravity="center_horizontal"
@@ -12,9 +22,11 @@
         android:layout_width="match_parent"
         android:layout_margin="3dp"
         android:id="@+id/panicButtonLayout"
-        android:text="SOS"
+        android:background="@drawable/panicbutton"
+        android:text="EMERGENCY"
         android:textColor="#ffffff"
         android:textSize="24dp"
         android:textStyle="bold|italic" />
+
 
 </LinearLayout>

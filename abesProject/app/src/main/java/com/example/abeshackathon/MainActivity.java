@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,19 +22,27 @@ import android.widget.TextView;
 import com.example.abeshackathon.Fragments.Dashboard;
 import com.example.abeshackathon.Fragments.Medical;
 import com.example.abeshackathon.Fragments.Profile;
+import com.example.abeshackathon.Receiveddata.Loginresponse;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
+import static com.example.abeshackathon.Retro.gson;
 
 public class MainActivity extends AppCompatActivity {
 
     NavigationView navigationView;
     View behindView;
-
+    Gson gson=new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         behindView = findViewById(R.id.Behindview);
+
         setSupportActionBar(toolbar);
         setTitle("Dashboard");
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -42,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hview=navigationView.getHeaderView(0);
+        TextView drawerName = (TextView) hview.findViewById(R.id.drawerName);
+        TextView drawerId = (TextView) hview.findViewById(R.id.drawerId);
+        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        String string=sharedPreferences.getString("logindata","");
+        Log.e("datacheck",string);
+        Type type=new TypeToken<Loginresponse>() {
+        }.getType();
+        Loginresponse loginresponse=gson.fromJson(string,type);
+        drawerName.setText(loginresponse.getStatus().toUpperCase());
+        drawerId.setText("");
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

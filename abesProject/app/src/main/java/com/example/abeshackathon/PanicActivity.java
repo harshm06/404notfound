@@ -52,7 +52,7 @@ public class PanicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_panic);
 
         final SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
-        String data = sharedPreferences.getString("loginData","data not stored");
+        String data = sharedPreferences.getString("logindata","data not stored");
         Loginresponse loginresponse=new Gson().fromJson(data,Loginresponse.class);
         PanicData panicdata = new PanicData();
         panicdata.setId(loginresponse.getId());
@@ -91,6 +91,7 @@ public class PanicActivity extends AppCompatActivity {
         if(flag.equals("1")){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Are You Sure")
+                    .setCancelable(false)
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -100,6 +101,7 @@ public class PanicActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
+                    finish();
                 }
             }).
              show();
@@ -113,6 +115,23 @@ public class PanicActivity extends AppCompatActivity {
             return;
         }
 
+    }
+
+    String PanicText(){
+        String resp="Alcohol:Frequesnt Consumer\nBlood Group:B+\nDiabetes:High\nSugar:Normal";
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+            String response = sharedPreferences.getString("PanicData","null");
+            Type type = new TypeToken<List<PanicResponse>>() {
+            }.getType();
+            List<PanicResponse> panicResponses=new Gson().fromJson(response,type);
+            resp = "Address:"+panicResponses.get(0).getLinkAddress()+"\nBlood Group:"+panicResponses.get(0).getLinkBloudGroup();
+        }
+        catch(Exception e){
+
+        }
+
+        return resp;
     }
 
     void startCountdown(){
@@ -144,15 +163,15 @@ public class PanicActivity extends AppCompatActivity {
         });
     }
 
-    void confirmation() {
-
-
-
+//    void confirmation() {
+//
+//
+//
 //        Log.e("confirmation flag",flag[0]+"");
-
-
-    }
-
+//
+//
+//    }
+//
 
     void panicTrigger() {
         progressBar.setProgress(20);
@@ -160,7 +179,7 @@ public class PanicActivity extends AppCompatActivity {
         cancel.setVisibility(View.GONE);
         relativeLayout.setVisibility(View.VISIBLE);
         SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
-        String data = sharedPreferences.getString("loginData","data not stored");
+        String data = sharedPreferences.getString("logindata","data not stored");
         Log.e("panic reached",data);
         Loginresponse loginresponse=new Gson().fromJson(data,Loginresponse.class);
         PanicData panicdata = new PanicData();

@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#00A4A5"
+            android:background="#E2C6A8"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"  />
 
@@ -28,7 +28,7 @@
             android:id="@+id/Behindview"
             android:layout_width="match_parent"
             android:layout_height="146dp"
-            android:background="#00A4A5"
+            android:background="#E2C6A8"
             android:layout_below="@id/toolbar"/>
         <FrameLayout
             android:id="@+id/flContent"

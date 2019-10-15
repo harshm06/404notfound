@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.abeshackathon.Apiinterface.Medicalrequest;
 import com.example.abeshackathon.JsonBody.Medicaldata;
+import com.example.abeshackathon.MedicalAdapter;
 import com.example.abeshackathon.R;
 import com.example.abeshackathon.Receiveddata.Loginresponse;
 import com.example.abeshackathon.Retro;
@@ -29,14 +30,14 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Medical extends Fragment {
-
+    RecyclerView recyclerView;
 
     Gson gson=new Gson();
     List<Medicaldata> medicaldata;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View parentView = inflater.inflate(R.layout.fragment_medical, container, false);
-        RecyclerView recyclerView=parentView.findViewById(R.id.recyclerview_medical);
+         recyclerView=parentView.findViewById(R.id.recyclerview_medical);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", MODE_PRIVATE);
         String string=sharedPreferences.getString("logindata","");
         Log.e("datacheck",string);
@@ -50,6 +51,11 @@ public class Medical extends Fragment {
             public void onResponse(Call<List<Medicaldata>> call, Response<List<Medicaldata>> response) {
                  medicaldata=response.body();
                 Log.e("medicaldta",gson.toJson(medicaldata));
+                LinearLayoutManager llm=new LinearLayoutManager(getActivity());
+                llm.setOrientation(RecyclerView.VERTICAL);
+                recyclerView.setLayoutManager(llm);
+                MedicalAdapter medicalAdapter=new MedicalAdapter(medicaldata,getContext());
+                recyclerView.setAdapter(medicalAdapter);
             }
 
             @Override
@@ -57,11 +63,7 @@ public class Medical extends Fragment {
 
             }
         });
-        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
-        llm.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-//        MedicalAdapter medicalAdapter=new MedicalAdapter(medicaldata);
-//        recyclerView.setAdapter(medicalAdapter);
+
         return parentView;
     }
 

@@ -5,7 +5,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="false"
     android:id="@+id/nav_header"
-    android:background="#00A4A5">
+    android:background="#E2C6A8">
 
 
     <ImageView
@@ -15,7 +15,7 @@
         android:layout_height="80dp"
         android:layout_centerVertical="true"
         android:layout_margin="8dp"
-        android:src="@drawable/baseline_account_circle_black_18dp" />
+        android:src="@drawable/doctor" />
 
 
     <LinearLayout
