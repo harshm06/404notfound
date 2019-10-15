@@ -37,7 +37,7 @@ public class Dashboard extends Fragment {
         TextView fromdate=parentView.findViewById(R.id.lastdate);
         TextView nextdate=parentView.findViewById(R.id.nextdate);
        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", MODE_PRIVATE);
-       String string=sharedPreferences.getString("logindata","");
+       String string=sharedPreferences.getString("loginData","");
         Log.e("datacheck",string);
        Type type=new TypeToken<Loginresponse>() {
        }.getType();

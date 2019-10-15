@@ -14,16 +14,18 @@ public class PanicButton extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
+        PanicActivity panicActivity = new PanicActivity();
+//        String text = panicActivity.WidgetContent();
         Intent intent = new Intent(context,PanicActivity.class);
-        // Construct the RemoteViews object
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.panic_button);
-        views.setTextViewText(R.id.panicButtonLayout, widgetText);
+        views.setTextViewText(R.id.panicButtonLayout, "SOS");
         views.setOnClickPendingIntent(R.id.panicButtonLayout,pendingIntent);
-        // Instruct the widget manager to update the widget
+
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
+
+
     }
 
     @Override
