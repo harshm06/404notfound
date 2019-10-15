@@ -86,7 +86,7 @@ def panic_button(request):
 		yag = yagmail.SMTP('kaustubh.1822it1070@kiet.edu', 'Mx1b2jny3c2k')
 		subject = "ALERT ALERT ALERT"
 		contents = ["HELP ! My name is "+name+" and I am your patient. I'm in a serious problem and in severe health issues, My previous health problems are : "+pre_Health+" . Do inform my emergency contact " + emergency_contact+" ."]
-		# yag.send(Email,subject,contents)
+		yag.send(Email,subject,contents)
 		user=list(login_details.objects.filter(link__id=data['id']).values('link__age','link__blood_group','link__address','link__doc_no','link__doc_name','link__emergency_contact'))
 		return JsonResponse(user,safe=False)
 
