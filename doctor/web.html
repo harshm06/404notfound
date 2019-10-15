@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+
+<head>
+  <meta charset="utf-8">
+  <script src="js/angular.min.js"></script>
+  <script src="js/web.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+  <script src="bower_components/angular-sweetalert/SweetAlert.min.js"></script>
+  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script> -->
+  <style media="screen">
+  body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: fixed;
+    background-image: url("img/pic12.jpg");
+  }
+  form{
+    float:right;
+    background-color:#80d4ff;
+    background-image: linear-gradient(to right, #80d4ff,#e6f7ff);
+    /* opacity: 0.5; */
+    width: 700px;
+    height: 100%;
+    padding: 40px;
+  }
+    input{
+      width:180px !important;
+      height:30px !important;
+    }
+    select{
+      width:180px !important;
+      height:30px !important;
+    }
+    textarea{
+      width:180px !important;
+      height:50px !important;
+    }
+    label{
+      font-size: 17px;
+    }
+    #button1{
+    background-color:#008CBA;
+    color: white;
+    border: 2px solid #008CBA;
+  }
+  #button1:hover {
+  background-color: white;
+  color:#008CBA;
+}
+  </style>
+  <title>Health Care</title>
+</head>
+
+<body ng-controller='webController'>
+  <a href="index.html"><img src="img/logo.png" style="background-color:rgba(192,192,192,0.9); height:60px; width: 170px;"></a>
+  <form class="my-form" name="myform">
+    <div style="background-image: linear-gradient(to right, #80d4ff,#e6f7ff); height:50px;" class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h2 style="text-align:center; color:blue; color: blue; font-weight: 5px !important; font-family: serif;;text-shadow: 2px 2px 2px #000000;">REGISTER</h2>
+      </div>
+    </div>
+  <div class="fluid-container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" title="NAME" ng-model="name">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="username">Username</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model="username">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="age">Age</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" ng-model="age">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="gender">Gender</label>
+          </div>
+          <div class="col-sm-8">
+            <select type="number" class="form-control" ng-options="x for x in gen_data" ng-model="gender">
+              <option for="" disabled>choose one</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="email">Email</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" ng-model="email">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="mobile">Mobile</label>
+          </div>
+            <div class="col-sm-8">
+              <input type="number" class="form-control" ng-model="mobile_no">
+            </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="emergency_contact">Emergency Contact No.</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" ng-model="emergency_contact">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="address">Address</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model="address">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="pre_Health">Pre Health</label>
+          </div>
+            <div class="col-sm-8">
+              <textarea type="text" class="form-control" ng-model="pre_Health"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="blood_group">Blood Group</label>
+          </div>
+          <div class="col-sm-8">
+            <select name="blood_group" class="form-control" ng-options="p for p in blood_group_data" ng-model="blood_group">
+              <option for="" disabled>choose one</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="family_doctor">Family Doctor</label>
+          </div>
+          <div class="col-sm-8">
+            <select name="family_doctor" ng-options="y.sno as y.value for y in family_doctor_data" ng-change="changeDoctor();" class="form-control" ng-model="family_doctor">
+              <option for="" disabled>choose one</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row" ng-show="showDoctor">
+          <div class="col-sm-4">
+            <label for="doc_name">Doctor Name</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model="doc_name">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row" ng-show="showDoctor">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="doc_no">Doctor Mobile No.</label>
+          </div>
+          <div class="col-sm-8">
+          <input type="number" class="form-control" ng-model="doc_no">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="doc_email">Doctor Email</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" ng-model="doc_email">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="password">Password</label>
+          </div>
+          <div class="col-sm-8">
+          <input type="password" class="form-control" ng-model="password">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="confirm_password">Confirm Password</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password" class="form-control" ng-model="confirm_password">
+          </div>
+        </div>
+      </div>
+    </div>
+    <center><button style="margin-top:25px; width:100px; height:40px; text-align:center;" class="form-control" id ="button1" type="button" name="button" ng-click="submit();">Submit</button></center>
+  </div>
+  </div>
+  </div>
+</form>
+</body>
+</html>

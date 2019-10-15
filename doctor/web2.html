@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <script src="js/angular.min.js"></script>
+    <script src="js/web2.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title></title>
+    <style media="screen">
+      body{
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-image: url(img/pic.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* opacity: 0.4; */
+      }
+      @media only screen and (max-width: 786px) {
+      body {
+
+        background-image: none;
+          background-color: black;
+      }
+      div.container{
+        height: 100%;
+        background-color:rgba(192,192,192,0.7);
+      }
+  }
+      .container{
+        margin-top: 40px;
+        background-color:rgba(192,192,192,0.9);
+        width : 500px;
+        height: 500px;
+        position: absolute;
+        left:30%;
+        padding: 15px !important;
+      }
+      label{
+        font-size: 15px;
+        font-weight: 4px;
+
+      }
+      input{
+        width: 200px !important;
+        height: 29px !important;
+        border:none!important;
+        border-bottom: 2px solid black !important;
+        background: none !important;
+        outline: none;
+
+      }
+      select{
+        font-size:15px;
+        width: 200px !important;
+        height: 40px !important;
+        border:none!important;
+        border-bottom: 2px solid black !important;
+         background: none !important;
+         background-color: transparent !important;
+         outline: none;
+      }
+      ::placeholder{
+        font-size: 15px;
+      }
+      #button1:hover{
+        background-color: #99ffd6;
+      }
+      .service option{
+        font-size: 14px !important;
+      }
+
+    </style>
+  </head>
+  <body ng-controller="web2Controller">
+    <form>
+      <a href="index.html"><img src="img/logo.png" style="background-color:rgba(192,192,192,0.9); height:60px; width: 170px;"></a>
+      <div class="container">
+        <div class="row">
+        <h4 style="text-align: center; font-family: sans-serif;text-shadow: 2px 2px 2px #000000; margin-left: 120px; ">Check Up Detail</h4>
+      </div>
+      <br>
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="Patient name">Patient Name</label>
+          <select ng-options="y.id as y.name for y in data" placeholder="Patient Name" class="form-control" ng-model="id">
+            <option class="service" value="" disabled>choose one</option>
+          </select>
+          </div>
+          <div class="col-sm-6">
+           <label  for="">Next appointment</label>
+           <input type="date" name="next_appoint" class="form-control" placeholder="Next Appointment" ng-model="next_appoint">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label  for="blood_pressure">Blood Pressure</label>
+          <input type="number" name="blood_pressure" class="form-control" placeholder="Blood Pressure" ng-model="blood_pressure">
+          </div>
+          <div class="col-sm-6">
+           <label for="">Sugar</label>
+           <input type="number" name="sugar" class="form-control" placeholder="Sugar" ng-model="sugar">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label  for="thyroid">Thyroid</label>
+          <input type="number" name="thyroid" class="form-control" placeholder="Thyroid"  ng-model="thyroid">
+          </div>
+          <div class="col-sm-6">
+           <label  for="medicines">Medicines</label>
+           <input type="text" name="medicines" class="form-control" placeholder="Medicines" ng-model="medicines">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="height">Height</label>
+          <input type="number" name="height" class="form-control" placeholder="Height" ng-model="height">
+          </div>
+          <div class="col-sm-6">
+           <label for="weight">Weight</label>
+           <input type="number" name="weight" class="form-control" placeholder="Weight" ng-model="weight">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="heart_disease">Heart Disease</label>
+          <select name="heart_disease" ng-options="x for x in heart_data" placeholder="Heart Disease" class="form-control" ng-model="heart_disease">
+            <option value="" disabled>choose one</option>
+          </select>
+          </div>
+          <div class="col-sm-6">
+           <label for="remark">Remark</label>
+           <input type="text" name="remark" class="form-control" placeholder="Remark" ng-model="remark">
+          </div>
+        </div>
+        <br>
+        <center><button class="btn btn-info" style="font-size: 17px;" type="button" ng-click="submit();" value="Submit">Submit</button></center>
+      </div>
+    </form>
+  </body>
+</html>
