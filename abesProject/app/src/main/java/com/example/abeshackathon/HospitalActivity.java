@@ -48,7 +48,7 @@ public class HospitalActivity extends AppCompatActivity {
             public void onResponse(Call<List<Hospitaldataresponse>> call, Response<List<Hospitaldataresponse>> response) {
                 List<Hospitaldataresponse> hospitaldataresponses=response.body();
                 Log.e("medicaldta",gson.toJson(hospitaldataresponses));
-               
+
             }
 
             @Override

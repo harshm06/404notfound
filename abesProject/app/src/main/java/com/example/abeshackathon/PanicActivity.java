@@ -4,15 +4,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import android.location.Address;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -35,16 +40,27 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PanicActivity extends AppCompatActivity {
+public class PanicActivity extends AppCompatActivity implements LocationListener{
     TextView countdown;
     Button cancel;
     RelativeLayout relativeLayout;
     ProgressBar progressBar;
+    // location
+    LocationManager locationManager;
+    protected LocationListener locationListener;
+    protected Context context;
+    TextView txtLat;
+    String lat;
+    String provider;
+    protected String latitude,longitude;
+    protected boolean gps_enabled,network_enabled;
+    //location
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +72,10 @@ public class PanicActivity extends AppCompatActivity {
         Loginresponse loginresponse=new Gson().fromJson(data,Loginresponse.class);
         PanicData panicdata = new PanicData();
         panicdata.setId(loginresponse.getId());
+        txtLat = findViewById(R.id.textMsg1);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        context=this;
+
 
         Login login = Retro.createService(Login.class);
         Call<List<WarnResponse>> call = login.warnResponse(panicdata);
@@ -174,6 +194,8 @@ public class PanicActivity extends AppCompatActivity {
 //
 
     void panicTrigger() {
+
+
         progressBar.setProgress(20);
         countdown.setVisibility(View.GONE);
         cancel.setVisibility(View.GONE);
@@ -224,7 +246,13 @@ public class PanicActivity extends AppCompatActivity {
         }.getType();
         List<PanicResponse> panicResponses=new Gson().fromJson(response,type);
 //            finalResponse = "Address:"+panicResponses.get(0).getLinkAddress()+"\nBlood Group:"+panicResponses.get(0).getLinkBloudGroup();
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//        Log.e("location",new Gson().toJson(locationManager));
         progressBar.setProgress(30);
         onMsg(panicResponses.get(0).getLinkEmergencyContact());
         progressBar.setProgress(60);
@@ -236,6 +264,7 @@ public class PanicActivity extends AppCompatActivity {
         Log.e("call1",panicResponses.get(0).getLinkEmergencyContact());
         Log.e("call2",panicResponses.get(0).getLinkDocName());
     }
+
 
     private boolean permissionGrantedCall() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -279,6 +308,14 @@ public class PanicActivity extends AppCompatActivity {
         }
     }
 
+    public void locationRequest(){
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+        }
+
+    }
+
     public void sendSMS(String number) {
 
 //        Uri sms_uri = Uri.parse("smsto:" + number);
@@ -291,7 +328,7 @@ public class PanicActivity extends AppCompatActivity {
         String SMS_SENT_INTENT_FILTER = "com.yourapp.sms_send";
         String SMS_DELIVERED_INTENT_FILTER = "com.yourapp.sms_delivered";
 
-        String message = "SOS!! I am seriously ill and being taken to nearest hospital ";
+        String message = "SOS!! I am seriously ill and being taken to nearest hospital " +"Current Location:"+"ABES Engineering College ,Campus-1,19th Km Stone,NH 24,Ghaziabad,Uttar Pradesh ";
         Log.e("number",number);
 
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(
@@ -303,4 +340,27 @@ public class PanicActivity extends AppCompatActivity {
         sms.sendTextMessage(number, null, message, sentPI, deliveredPI);
 
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        txtLat = (TextView) findViewById(R.id.textMsg1);
+        Log.e("location",new Gson().toJson(location));
+        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
+    }
+
 }
