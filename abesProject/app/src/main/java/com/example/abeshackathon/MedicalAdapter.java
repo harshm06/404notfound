@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.abeshackathon.JsonBody.Medicaldata;
+import com.example.abeshackathon.Receiveddata.Medicaldatarersponse;
 
 import java.util.List;
 
 public class MedicalAdapter extends RecyclerView.Adapter<MedicalAdapter.ViewHolder>{
 
-    List<Medicaldata> medicaldata;
+    List<Medicaldatarersponse> medicaldata;
     Context context;
 
-    public MedicalAdapter(List<Medicaldata> medicaldata, Context context) {
+    public MedicalAdapter(List<Medicaldatarersponse> medicaldata, Context context) {
         this.medicaldata = medicaldata;
         this.context = context;
     }

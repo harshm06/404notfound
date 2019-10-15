@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.abeshackathon.Apiinterface.Medicalrequest;
 import com.example.abeshackathon.Apiinterface.Profiledatarequest;
-import com.example.abeshackathon.JsonBody.Medicaldata;
+//import com.example.abeshackathon.JsonBody.Medicaldata;
 import com.example.abeshackathon.JsonBody.Profiledata;
 import com.example.abeshackathon.R;
 import com.example.abeshackathon.Receiveddata.Loginresponse;

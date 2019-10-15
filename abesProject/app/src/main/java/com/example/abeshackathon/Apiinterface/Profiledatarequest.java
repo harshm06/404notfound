@@ -1,6 +1,6 @@
 package com.example.abeshackathon.Apiinterface;
 
-import com.example.abeshackathon.JsonBody.Medicaldata;
+//import com.example.abeshackathon.JsonBody.Medicaldata;
 import com.example.abeshackathon.JsonBody.Profiledata;
 
 import java.util.List;
