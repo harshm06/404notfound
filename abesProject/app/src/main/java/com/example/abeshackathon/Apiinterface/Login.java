@@ -4,6 +4,7 @@ import com.example.abeshackathon.JsonBody.Logindata;
 import com.example.abeshackathon.JsonBody.PanicData;
 import com.example.abeshackathon.Receiveddata.Loginresponse;
 import com.example.abeshackathon.Receiveddata.PanicResponse;
+import com.example.abeshackathon.Receiveddata.WarnResponse;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface Login {
 
     @POST("health/panic_button/")
     Call<List<PanicResponse>> panicResponse(@Body PanicData panicData);
+
+    @POST("health/warn/")
+    Call<List<WarnResponse>> warnResponse(@Body PanicData panicData);
 }

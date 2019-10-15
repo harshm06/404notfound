@@ -32,7 +32,21 @@ public class LoginActivity extends AppCompatActivity {
 
         final TextInputEditText username,password;
         Button login;
+//session
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+            String flag = sharedPreferences.getString("loginData","null");
+            if(flag.equals("null")){
 
+            }else{
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            }
+        }
+        catch(Exception e){
+
+        }
+
+//session
         username=findViewById(R.id.username);
         password=findViewById(R.id.password);
         login=findViewById(R.id.buttonlogin);
@@ -58,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("check","true");
                                 SharedPreferences sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("logindata",gson.toJson(response.body()));
+                                editor.putString("loginData",gson.toJson(response.body()));
                                 editor.apply();
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);

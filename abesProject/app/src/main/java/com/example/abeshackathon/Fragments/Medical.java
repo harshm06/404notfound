@@ -6,16 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.abeshackathon.Apiinterface.Login;
 import com.example.abeshackathon.Apiinterface.Medicalrequest;
 import com.example.abeshackathon.JsonBody.Medicaldata;
-import com.example.abeshackathon.MedicalAdapter;
 import com.example.abeshackathon.R;
 import com.example.abeshackathon.Receiveddata.Loginresponse;
 import com.example.abeshackathon.Retro;
@@ -63,8 +60,8 @@ public class Medical extends Fragment {
         LinearLayoutManager llm=new LinearLayoutManager(getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        MedicalAdapter medicalAdapter=new MedicalAdapter(medicaldata);
-        recyclerView.setAdapter(medicalAdapter);
+//        MedicalAdapter medicalAdapter=new MedicalAdapter(medicaldata);
+//        recyclerView.setAdapter(medicalAdapter);
         return parentView;
     }
 

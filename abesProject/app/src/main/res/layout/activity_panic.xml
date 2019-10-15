@@ -10,8 +10,13 @@
     <TextView
         android:id="@+id/countdown"
         android:gravity="center"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_design"
         android:text="SOS facilities in:"/>
 
     <Button
@@ -19,6 +24,7 @@
         android:layout_below="@+id/countdown"
         android:id="@+id/panicCancel"
         android:layout_width="wrap_content"
+        android:background="#00A4A5"
         android:layout_height="wrap_content"
         android:text="Cancel"/>
 
@@ -28,12 +34,12 @@
         android:layout_below="@+id/panicCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/textMsg1"
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-
             android:text="sending text to ****"
             android:textSize="25dp" />
 
@@ -45,48 +51,19 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
 
-        <TextView
-            android:id="@+id/textMsg2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@+id/textMsg1"
-            android:layout_marginTop="10dp"
-            android:layout_margin="10dp"
-
-            android:layout_marginBottom="5dp"
-            android:text="sending text to ****"
-            android:textSize="25dp" />
-
         <ProgressBar
-            android:layout_toRightOf="@+id/textMsg2"
-            android:layout_below="@+id/ProgressBar1"
+            android:layout_below="@+id/textMsg1"
             android:id="@+id/ProgressBar2"
             android:layout_margin="10dp"
+            android:progress="10"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:min="0"
+            android:max="100"
 
-            android:layout_width="wrap_content"
             android:layout_height="50dp"/>
 
 
-        <TextView
-            android:id="@+id/CallAmbulance"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@+id/textMsg2"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_margin="10dp"
-
-            android:text="sending call to ****"
-            android:textSize="25dp" />
-
-        <ProgressBar
-            android:layout_toRightOf="@+id/CallAmbulance"
-            android:layout_below="@+id/ProgressBar2"
-            android:layout_margin="10dp"
-
-            android:id="@+id/ProgressBar3"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
 
 
     </RelativeLayout>
