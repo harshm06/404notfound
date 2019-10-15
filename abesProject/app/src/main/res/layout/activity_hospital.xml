@@ -18,7 +18,37 @@
         app:titleTextColor="#fff"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"  />
-    
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="20dp"
+        android:id="@+id/spinner"
+        android:layout_centerHorizontal="true">
+
+    </Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/reset"
+        android:background="#9AB0EA"
+        android:text="reset"></Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Warning"
+        android:background="#9AB0EA"
+        android:id="@+id/addwarn"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="160dp">
+
+    </Button>
 
 
 </RelativeLayout>
